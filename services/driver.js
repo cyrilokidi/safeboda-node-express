@@ -1,4 +1,4 @@
-const db = require('../util/db');
+const { db } = require('../util');
 
 module.exports = class Driver {
   constructor() {
