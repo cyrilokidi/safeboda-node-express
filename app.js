@@ -4,9 +4,9 @@ const express = require('express');
 const cors = require('cors');
 const requestLogger = require('morgan');
 const errors = require('./errors');
-const logger = require('./util/logger');
+const { logger } = require('./util');
 const routes = require('./routes');
-const errorHandler = require('./middlewares/errorHandler');
+const { errorHandler } = require('./middlewares');
 
 const requestLoggerFormat =
   process.env.NODE_ENV === 'development' ? 'dev' : 'combined';
