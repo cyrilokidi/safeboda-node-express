@@ -1,7 +1,6 @@
 /**
  * Create route not found error instance.
- *
- * Returns route not found error instance.
+ * @returns route not found error instance.
  */
 
 module.exports = class RouteNotFoundError extends Error {

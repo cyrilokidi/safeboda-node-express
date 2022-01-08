@@ -1,7 +1,6 @@
 /**
  * Create internal server error instance.
- *
- * Returns internal server error instance.
+ * @returns internal server error instance.
  */
 
 module.exports = class InternalServerError extends Error {
