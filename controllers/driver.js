@@ -1,7 +1,6 @@
 const Service = require('../services/driver');
 const validator = require('../middlewares/validator');
 const schema = require('../schemas/driver');
-const req = require('express/lib/request');
 
 module.exports = {
   create: [
@@ -21,6 +20,7 @@ module.exports = {
   ],
 
   suspend: [
+    validator(schema.suspend),
     async (req, res, next) => {
       try {
         const { params } = req;
