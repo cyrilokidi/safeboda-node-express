@@ -1,5 +1,5 @@
 const Service = require('../services/driver');
-const validator = require('../middlewares/validator');
+const { validator } = require('../middlewares');
 const schema = require('../schemas/driver');
 
 module.exports = {
