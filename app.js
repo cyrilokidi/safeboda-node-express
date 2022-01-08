@@ -5,7 +5,7 @@ const cors = require('cors');
 const requestLogger = require('morgan');
 const { NODE_ENV } = process.env;
 const errors = require('./errors');
-const logger = require('./tools/logger');
+const logger = require('./util/logger');
 const routes = require('./routes');
 const errorHandlers = require('./middlewares/errorHandlers');
 
