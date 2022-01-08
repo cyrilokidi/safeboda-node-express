@@ -20,6 +20,15 @@ module.exports = class Driver {
    * @returns query to suspend driver by id.
    */
   suspend(id) {
-    return db(this.table).update({ suspended: true }, ['*']).where({ id });
+    return db(this.table).update({ suspended: true }).where({ id });
+  }
+
+  /**
+   * Unsuspend driver by id.
+   * @param {String} id Driver id.
+   * @returns query to unsuspend driver id.
+   */
+  unsuspend(id) {
+    return db(this.table).update({ suspended: false }).where({ id });
   }
 };

@@ -23,9 +23,25 @@ module.exports = {
     validator(schema.suspend),
     async (req, res, next) => {
       try {
-        const { params } = req;
+        const { id } = req.params;
         const service = new Service();
-        await service.suspend(params.id);
+        await service.suspend(id);
+
+        res.status(204);
+        res.end();
+      } catch (error) {
+        next(error);
+      }
+    },
+  ],
+
+  unsuspend: [
+    validator(schema.unsuspend),
+    async (req, res, next) => {
+      try {
+        const { id } = req.params;
+        const service = new Service();
+        await service.unsuspend(id);
 
         res.status(204);
         res.end();

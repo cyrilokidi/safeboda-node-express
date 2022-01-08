@@ -18,4 +18,12 @@ module.exports = {
       }),
     })
     .unknown(),
+
+  unsuspend: object
+    .keys({
+      params: object.keys({
+        id: string.guid({ version: 'uuidv4' }).required().label('id'),
+      }),
+    })
+    .unknown(),
 };
