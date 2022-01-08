@@ -12,6 +12,7 @@ module.exports = class QueryError extends Error {
     }
 
     this.name = 'QueryError';
+    this.code = 406;
     this.date = new Date();
     this.message = message;
   }
