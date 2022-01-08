@@ -3,13 +3,13 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const requestLogger = require('morgan');
-const { NODE_ENV } = process.env;
 const errors = require('./errors');
 const logger = require('./util/logger');
 const routes = require('./routes');
-const errorHandlers = require('./middlewares/errorHandlers');
+const errorHandler = require('./middlewares/errorHandler');
 
-const requestLoggerFormat = NODE_ENV === 'development' ? 'dev' : 'combined';
+const requestLoggerFormat =
+  process.env.NODE_ENV === 'development' ? 'dev' : 'combined';
 const requestLoggerMiddleware = requestLogger(requestLoggerFormat);
 const corsMiddleware = cors();
 
@@ -23,19 +23,14 @@ app.use(requestLoggerMiddleware);
 app.use(jsonParser);
 app.use(urlEncodedParser);
 
-// Set app errors setting
+//Set app variables
 app.set('errors', errors);
-
-// Set app logger setting
 app.set('logger', logger);
 
 // Use routes
 app.use(routes);
 
 // Use error handlers
-app.use(errorHandlers.queryErrorHandler);
-
-app.use(errorHandlers.internalServerErrorHandler);
-app.use(errorHandlers.routeNotFoundErrorHandler);
+app.use(errorHandler);
 
 module.exports = app;
