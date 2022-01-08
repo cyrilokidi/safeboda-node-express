@@ -1,11 +1,11 @@
 const knex = require('knex');
 const logger = require('./logger');
 const { NODE_ENV } = process.env;
-const config = require('../knexfile')[NODE_ENV];
+const config = require('../knexfile');
 const { QueryError, ConflictError } = require('../errors');
 
 const db = knex({
-  ...config,
+  ...config[NODE_ENV],
   asyncStackTraces: NODE_ENV === 'development',
   log: {
     // log error events
@@ -33,12 +33,24 @@ const db = knex({
 // log query events
 db.on('query', (data) => logger.info(JSON.stringify(data)));
 
+/**
+ * Handle db error.
+ * @param {Object} error Error object.
+ * @returns handled db error.
+ */
 const errorHandler = (error) => {
   let result = new QueryError(error.message);
 
   if (error.code === '23505') {
-    if (error.constraint === 'driver_phone_number_unique')
+    const { constraint } = error;
+
+    if (constraint === 'driver_phone_number_unique')
       result = new ConflictError('Driver phone number is already available.');
+
+    if (constraint === 'passenger_phone_number_unique')
+      result = new ConflictError(
+        'Passenger phone number is already available.'
+      );
   }
 
   return result;

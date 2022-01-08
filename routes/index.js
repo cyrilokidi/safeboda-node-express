@@ -1,6 +1,7 @@
 const router = require('express').Router();
 
 const driver = require('./driver');
+const passenger = require('./passenger');
 
 // Test API availaibility.
 router.all('/', (req, res) => {
@@ -9,5 +10,6 @@ router.all('/', (req, res) => {
 });
 
 router.use(driver);
+router.use(passenger);
 
 module.exports = router;

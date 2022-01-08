@@ -1,10 +1,10 @@
 const Service = require('../services/driver');
-const { validator } = require('../middlewares');
+const { validate } = require('../middlewares');
 const schema = require('../schemas/driver');
 
 module.exports = {
   create: [
-    validator(schema.create),
+    validate(schema.create),
     async (req, res, next) => {
       try {
         const { body } = req;
@@ -20,7 +20,7 @@ module.exports = {
   ],
 
   suspend: [
-    validator(schema.suspend),
+    validate(schema.suspend),
     async (req, res, next) => {
       try {
         const { id } = req.params;
@@ -36,7 +36,7 @@ module.exports = {
   ],
 
   unsuspend: [
-    validator(schema.unsuspend),
+    validate(schema.unsuspend),
     async (req, res, next) => {
       try {
         const { id } = req.params;
