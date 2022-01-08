@@ -2,7 +2,7 @@ const knex = require('knex');
 const logger = require('./logger');
 const { NODE_ENV } = process.env;
 const config = require('../knexfile')[NODE_ENV];
-const { QueryError } = require('../errors');
+const { QueryError, ConflictError } = require('../errors');
 
 const db = knex({
   ...config,
@@ -35,6 +35,11 @@ db.on('query', (data) => logger.info(JSON.stringify(data)));
 
 const errorHandler = (error) => {
   let result = new QueryError(error.message);
+
+  if (error.code === '23505') {
+    if (error.constraint === 'driver_phone_number_unique')
+      result = new ConflictError('Driver phone number is already available.');
+  }
 
   return result;
 };
