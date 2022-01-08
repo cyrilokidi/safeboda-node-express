@@ -9,6 +9,7 @@ exports.up = (knex) =>
       .defaultTo(knex.raw('uuid_generate_v4()'));
     table.string('name').notNullable();
     table.string('phone_number').notNullable();
+    table.boolean('suspended').defaultTo(false);
     table.timestamp('created_at').notNullable().defaultTo(knex.fn.now());
 
     // constraints
