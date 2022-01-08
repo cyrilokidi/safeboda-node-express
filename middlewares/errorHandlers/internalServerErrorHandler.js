@@ -1,16 +1,13 @@
-/**
- * Handle internal server error.
- * @returns internal server error object.
- */
+// Handle internal server error
 module.exports = (err, req, res, next) => {
-  const errors = req.app.get('errors');
+  const { InternalServerError } = req.app.get('errors');
   const logger = req.app.get('logger');
 
   // log error
 
   logger.error(err.stack);
 
-  const e = new errors.InternalServerError();
+  const e = new InternalServerError();
 
   res.status(500);
   res.json(e);

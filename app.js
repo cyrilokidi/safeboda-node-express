@@ -33,6 +33,8 @@ app.set('logger', logger);
 app.use(routes);
 
 // Use error handlers
+app.use(errorHandlers.queryErrorHandler);
+
 app.use(errorHandlers.internalServerErrorHandler);
 app.use(errorHandlers.routeNotFoundErrorHandler);
 

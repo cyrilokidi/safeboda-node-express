@@ -1,10 +1,7 @@
-/**
- * Handle route not found error.
- * @returns route not found error object.
- */
+// Handle route not found error
 module.exports = (req, res, next) => {
-  const errors = req.app.get('errors');
-  const err = new errors.RouteNotFoundError();
+  const { RouteNotFoundError } = req.app.get('errors');
+  const err = new RouteNotFoundError();
 
   res.status(404);
   res.json(err);
