@@ -5,7 +5,7 @@ const cors = require('cors');
 const requestLogger = require('morgan');
 const { NODE_ENV } = process.env;
 const errors = require('./errors');
-const logger = require('./tools/logger');
+const logger = require('./util/logger');
 const routes = require('./routes');
 const errorHandlers = require('./middlewares/errorHandlers');
 
@@ -33,6 +33,8 @@ app.set('logger', logger);
 app.use(routes);
 
 // Use error handlers
+app.use(errorHandlers.queryErrorHandler);
+
 app.use(errorHandlers.internalServerErrorHandler);
 app.use(errorHandlers.routeNotFoundErrorHandler);
 
