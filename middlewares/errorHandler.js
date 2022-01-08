@@ -1,13 +1,25 @@
-module.exports = (err, req, res, next) => {
-  const errors = req.app.get('errors');
+module.exports = [
+  // Generic error handler
+  (err, req, res, next) => {
+    const errors = req.app.get('errors');
 
-  if (err instanceof errors[err.name]) {
-    res.status(errors[err.name].code);
-    res.json(err);
-  } else {
-    const e = new errors.InternalServerError();
+    if (errors[err.name] && err instanceof errors[err.name]) {
+      res.status(err.code);
+      res.json(err);
+    } else {
+      const e = new errors.InternalServerError();
 
-    res.status(500);
+      res.status(e.code);
+      res.json(e);
+    }
+  },
+
+  // Route not found error handler
+  (req, res, next) => {
+    const { RouteNotFoundError } = req.app.get('errors');
+    const e = new RouteNotFoundError();
+
+    res.status(e.code);
     res.json(e);
-  }
-};
+  },
+];

@@ -12,6 +12,7 @@ module.exports = class InternalServerError extends Error {
     }
 
     this.name = 'InternalServerError';
+    this.code = 500;
     this.date = new Date();
     this.message = 'Internal server error.';
   }
