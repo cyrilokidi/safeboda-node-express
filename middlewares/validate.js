@@ -5,7 +5,7 @@ const { RequestValidationError } = require('../errors');
  * @param {Object} schema Request schema.
  */
 module.exports = (schema) => (req, res, next) => {
-  const { error } = schema.validate(req);
+  const { error, value } = schema.validate(req);
 
   // check if validation failed
 
@@ -13,5 +13,11 @@ module.exports = (schema) => (req, res, next) => {
     const err = new RequestValidationError(error.message);
 
     next(err);
-  } else next();
+  } else {
+    if (value.query) req.query = value.query;
+    if (value.params) req.params = value.params;
+    if (value.body) req.body = value.body;
+
+    next();
+  }
 };

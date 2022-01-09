@@ -34,4 +34,26 @@ module.exports = {
       }
     },
   ],
+
+  ongoing: [
+    validate(schema.ongoing),
+    async (req, res, next) => {
+      try {
+        const { query } = req;
+        const service = new Service();
+        const [rides, [{ count }]] = await service.ongoing(query);
+
+        res.status(200);
+        res.json({
+          data: rides,
+          page_number: query.page_number,
+          page_limit: query.page_limit,
+          page_count: 1,
+          total_count: Number(count),
+        });
+      } catch (error) {
+        next(error);
+      }
+    },
+  ],
 };

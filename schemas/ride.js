@@ -31,4 +31,28 @@ module.exports = {
       }),
     })
     .unknown(),
+
+  ongoing: object
+    .keys({
+      query: object.keys({
+        search: string.label('search'),
+        page_number: number.min(1).default(1).label('page number'),
+        page_limit: number.default(1).label('page limit'),
+        sort_field: string
+          .valid(
+            'passenger_name',
+            'passenger_phone_number',
+            'driver_name',
+            'driver_phone_number',
+            'created_at'
+          )
+          .default('created_at')
+          .label('sort field'),
+        sort_order: string
+          .valid('asc', 'desc')
+          .default('desc')
+          .label('sort order'),
+      }),
+    })
+    .unknown(),
 };
