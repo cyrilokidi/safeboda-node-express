@@ -51,6 +51,9 @@ const errorHandler = (error) => {
       result = new ConflictError(
         'Passenger phone number is already available.'
       );
+
+    if (constraint === 'ride_passenger_id_driver_id_unique')
+      result = new ConflictError('Ride is already available.');
   }
 
   return result;
