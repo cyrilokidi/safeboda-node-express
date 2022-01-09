@@ -45,11 +45,9 @@ module.exports = {
 
         res.status(200);
         res.json({
-          data: rides,
-          page_number: query.page_number,
-          page_limit: query.page_limit,
-          page_count: 1,
+          ...query,
           total_count: Number(count),
+          rides,
         });
       } catch (error) {
         next(error);

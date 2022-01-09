@@ -33,25 +33,6 @@ module.exports = class Ride {
     return page_number * page_limit - page_limit;
   }
 
-  prepareSortField(field) {
-    switch (field) {
-      case 'passenger_name':
-        return 'passenger.name';
-
-      case 'passenger_phone_number':
-        return 'passenger.phone_number';
-
-      case 'driver_name':
-        return 'driver.name';
-
-      case 'driver_phone_number':
-        return 'driver.phone_number';
-
-      default:
-        return `${this.table}.created_at`;
-    }
-  }
-
   /**
    * Fetch many ongoing rides.
    * @param {Object} options Query pagination options.
@@ -60,35 +41,44 @@ module.exports = class Ride {
   ongoing(options) {
     const { search, page_number, page_limit, sort_field, sort_order } = options;
     const offset = this.calcOffset(page_number, page_limit);
-    const sortField = this.prepareSortField(sort_field);
-    let query = () =>
-      db(this.table)
-        .where({ done: false })
-        .join('passenger', `${this.table}.passenger_id`, 'passenger.id')
-        .join('driver', `${this.table}.driver_id`, 'driver.id');
 
-    if (search)
-      query = () =>
-        db(this.table)
-          .where({ done: false })
-          .andWhere((b) => {
-            b.where('passenger.name', 'ILIKE', `%${search}%`);
-            b.orWhere('passenger.phone_number', 'ILIKE', `%${search}%`);
-            b.orWhere('driver.name', 'ILIKE', `%${search}%`);
-            b.orWhere('driver.phone_number', 'ILIKE', `%${search}%`);
-          })
-          .join('passenger', `${this.table}.passenger_id`, 'passenger.id')
-          .join('driver', `${this.table}.driver_id`, 'driver.id');
+    const query = () =>
+      search
+        ? db(this.table)
+            .where({ done: false })
+            .andWhere((b) => {
+              b.where('passenger.name', 'ILIKE', `%${search}%`);
+              b.orWhere('passenger.phone_number', 'ILIKE', `%${search}%`);
+              b.orWhere('driver.name', 'ILIKE', `%${search}%`);
+              b.orWhere('driver.phone_number', 'ILIKE', `%${search}%`);
+            })
+            .join('passenger', `${this.table}.passenger_id`, 'passenger.id')
+            .join('driver', `${this.table}.driver_id`, 'driver.id')
+        : db(this.table)
+            .where({ done: false })
+            .join('passenger', `${this.table}.passenger_id`, 'passenger.id')
+            .join('driver', `${this.table}.driver_id`, 'driver.id');
 
     return Promise.all([
       query()
         .offset(offset)
         .select({
           id: `${this.table}.id`,
+          passenger_id: 'passenger.id',
+          passenger_name: 'passenger.name',
+          passenger_phone_number: 'passenger.phone_number',
+          driver_id: 'driver.id',
+          driver_name: 'driver.name',
+          driver_phone_number: 'driver.phone_number',
+          done: `${this.table}.done`,
+          pickup_point_lat: `${this.table}.pickup_point_lat`,
+          pickup_point_long: `${this.table}.pickup_point_long`,
+          destination_lat: `${this.table}.destination_lat`,
+          destination_long: `${this.table}.destination_long`,
           created_at: `${this.table}.created_at`,
         })
         .limit(page_limit)
-        .orderBy(sortField, sort_order),
+        .orderBy(sort_field, sort_order),
       query().count(),
     ]);
   }

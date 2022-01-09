@@ -47,6 +47,24 @@ module.exports = {
             'created_at'
           )
           .default('created_at')
+          .custom((value) => {
+            switch (value) {
+              case 'passenger_name':
+                return 'passenger.name';
+
+              case 'passenger_phone_number':
+                return 'passenger.phone_number';
+
+              case 'driver_name':
+                return 'driver.name';
+
+              case 'driver_phone_number':
+                return 'driver.phone_number';
+
+              default:
+                return 'ride.created_at';
+            }
+          })
           .label('sort field'),
         sort_order: string
           .valid('asc', 'desc')
