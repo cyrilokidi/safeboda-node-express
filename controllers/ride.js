@@ -18,4 +18,20 @@ module.exports = {
       }
     },
   ],
+
+  stop: [
+    validate(schema.stop),
+    async (req, res, next) => {
+      try {
+        const { params } = req;
+        const service = new Service();
+        const [ride] = await service.stop(params.id);
+
+        res.status(204);
+        res.json(ride);
+      } catch (error) {
+        next(error);
+      }
+    },
+  ],
 };
