@@ -9,7 +9,7 @@ exports.up = (knex) =>
       .defaultTo(knex.raw('uuid_generate_v4()'));
     table.uuid('passenger_id').notNullable();
     table.uuid('driver_id').notNullable();
-    table.boolean('done').defaultTo(false);
+    table.boolean('done').notNullable().defaultTo(false);
     table.decimal('pickup_point_lat', 8, 6);
     table.decimal('pickup_point_long', 9, 6);
     table.decimal('destination_lat', 8, 6);
@@ -34,7 +34,7 @@ exports.up = (knex) =>
 
     // constraint
 
-    table.unique(['passenger_id', 'driver_id']);
+    table.unique(['passenger_id', 'driver_id', 'done']);
   });
 
 exports.down = (knex) => knex.schema.dropTable(name);

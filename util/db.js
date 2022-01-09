@@ -52,7 +52,7 @@ const errorHandler = (error) => {
         'Passenger phone number is already available.'
       );
 
-    if (constraint === 'ride_passenger_id_driver_id_unique')
+    if (constraint === 'ride_passenger_id_driver_id_done_unique')
       result = new ConflictError('Ride is already available.');
   }
 
