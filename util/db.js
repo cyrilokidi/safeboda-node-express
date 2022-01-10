@@ -2,7 +2,7 @@ const knex = require('knex');
 const logger = require('./logger');
 const { NODE_ENV } = process.env;
 const config = require('../knexfile');
-const { QueryError, ConflictError } = require('../errors');
+const { QueryError, ConflictError, RecordNotFoundError } = require('../errors');
 
 const db = knex({
   ...config[NODE_ENV],
@@ -34,26 +34,60 @@ const db = knex({
 db.on('query', (data) => logger.info(JSON.stringify(data)));
 
 /**
+ * Handle db conflict error.
+ * @param {String} constraint DB error constraint.
+ * @returns conflict error instance.
+ */
+const conflictErrorHandler = (constraint) => {
+  switch (constraint) {
+    case 'driver_phone_number_unique':
+      return new ConflictError('Driver phone number is already available.');
+
+    case 'passenger_phone_number_unique':
+      return new ConflictError('Passenger phone number is already available.');
+
+    case 'ride_passenger_id_driver_id_done_unique':
+      return new ConflictError('Ride is already available.');
+
+    default:
+      return new ConflictError('Record is already available.');
+  }
+};
+
+/**
+ * Handle db record not found error.
+ * @param {String} constraint DB error constraint.
+ * @returns record not found error instance.
+ */
+const recordNotFoundErrorHandler = (constraint) => {
+  switch (constraint) {
+    case 'ride_passenger_id_foreign':
+      return new RecordNotFoundError('Passenger not found.');
+
+    case 'ride_driver_id_foreign':
+      return new RecordNotFoundError('Driver not found.');
+
+    default:
+      return new RecordNotFoundError('Record not found.');
+  }
+};
+
+/**
  * Handle db error.
  * @param {Object} error Error object.
  * @returns handled db error.
  */
-const errorHandler = (error) => {
-  let result = new QueryError(error.message);
+const errorHandler = ({ code, constraint, message }) => {
+  switch (code) {
+    case '23505':
+      return conflictErrorHandler(constraint);
 
-  if (error.code === '23505') {
-    const { constraint } = error;
+    case '23503':
+      return recordNotFoundErrorHandler(constraint);
 
-    if (constraint === 'driver_phone_number_unique')
-      result = new ConflictError('Driver phone number is already available.');
-
-    if (constraint === 'passenger_phone_number_unique')
-      result = new ConflictError(
-        'Passenger phone number is already available.'
-      );
+    default:
+      return new QueryError(message);
   }
-
-  return result;
 };
 
 // handle query errors
