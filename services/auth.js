@@ -4,8 +4,8 @@ const { sign } = require('jsonwebtoken');
 module.exports = class Auth {
   constructor() {
     this.admin = {
-      email: 'okidicyril@gmail.com',
-      password: 'Password123',
+      email: process.env.ADMIN_EMAIL,
+      password: process.env.ADMIN_PASSWORD,
     };
   }
 
