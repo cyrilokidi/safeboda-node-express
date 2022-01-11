@@ -2,5 +2,9 @@
   "driver": {
     "name": "John Doe",
     "phone_number": "+254700000000"
+  },
+  "passenger": {
+    "name": "Jane Doe",
+    "phone_number": "+254700000001"
   }
 }
