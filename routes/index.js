@@ -1,5 +1,6 @@
 const router = require('express').Router();
 
+const authorize = require('../middlewares/authorize');
 const auth = require('./auth');
 const driver = require('./driver');
 const passenger = require('./passenger');
@@ -12,6 +13,7 @@ router.all('/', (req, res) => {
 });
 
 router.use(auth);
+router.use(authorize); // Use authorization to secure next end-points
 router.use(driver);
 router.use(passenger);
 router.use(ride);
