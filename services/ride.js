@@ -39,18 +39,22 @@ module.exports = class Ride {
    * @returns {Array} query to get many ongoing rides.
    */
   ongoing(options) {
-    const { search, page_number, page_limit, sort_field, sort_order } = options;
-    const offset = this.calcOffset(page_number, page_limit);
+    // const { search, page_number, page_limit, sort_field, sort_order } = options;
+    const offset = this.calcOffset(options.page_number, options.page_limit);
 
     const query = () =>
-      search
+      options.search
         ? db(this.table)
             .where({ done: false })
             .andWhere((b) => {
-              b.where('passenger.name', 'ILIKE', `%${search}%`);
-              b.orWhere('passenger.phone_number', 'ILIKE', `%${search}%`);
-              b.orWhere('driver.name', 'ILIKE', `%${search}%`);
-              b.orWhere('driver.phone_number', 'ILIKE', `%${search}%`);
+              b.where('passenger.name', 'ILIKE', `%${options.search}%`);
+              b.orWhere(
+                'passenger.phone_number',
+                'ILIKE',
+                `%${options.search}%`
+              );
+              b.orWhere('driver.name', 'ILIKE', `%${options.search}%`);
+              b.orWhere('driver.phone_number', 'ILIKE', `%${options.search}%`);
             })
             .join('passenger', `${this.table}.passenger_id`, 'passenger.id')
             .join('driver', `${this.table}.driver_id`, 'driver.id')
@@ -77,8 +81,8 @@ module.exports = class Ride {
           destination_long: `${this.table}.destination_long`,
           created_at: `${this.table}.created_at`,
         })
-        .limit(page_limit)
-        .orderBy(sort_field, sort_order),
+        .limit(options.page_limit)
+        .orderBy(options.sort_field, options.sort_order),
       query().count(),
     ]);
   }
