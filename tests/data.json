@@ -1,8 +1,6 @@
 {
-  "drivers": [
-    {
-      "name": "John Doe",
-      "phone_number": "+254700000000"
-    }
-  ]
+  "driver": {
+    "name": "John Doe",
+    "phone_number": "+254700000000"
+  }
 }
