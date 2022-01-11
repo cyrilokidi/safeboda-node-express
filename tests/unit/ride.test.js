@@ -11,31 +11,60 @@ describe('Ride management', function () {
     let driverId = null;
 
     before(function (done) {
-      // Create new passenger before test
-      db('passenger')
-        .where({ phone_number: passenger.phone_number })
-        .del()
-        .then(() => db('passenger').insert({ ...passenger }, ['id']))
-        .then(([response]) => {
-          passengerId = response.id;
+      db.transaction(function (trx) {
+        db('passenger')
+          .where({ phone_number: passenger.phone_number })
+          .del()
+          .transacting(trx)
+          .then(() =>
+            db('passenger')
+              .insert({ ...passenger }, ['id'])
+              .transacting(trx)
+          )
+          .then(([response]) => {
+            passengerId = response.id;
 
-          return db('driver')
-            .where({ phone_number: driver.phone_number })
-            .del();
-        })
-        .then(() => db('driver').insert({ ...driver }, ['id']))
-        .then(([response]) => {
-          driverId = response.id;
+            return db('driver')
+              .where({ phone_number: driver.phone_number })
+              .del()
+              .transacting(trx);
+          })
+          .then(() =>
+            db('driver')
+              .insert({ ...driver }, ['id'])
+              .transacting(trx)
+          )
+          .then(([response]) => {
+            driverId = response.id;
 
-          done();
-        })
+            return;
+          })
+          .then(trx.commit)
+          .catch(trx.rollback);
+      })
+        .then(() => done())
+        .catch((err) => done(err));
+    });
+
+    after(function (done) {
+      db.transaction(function (trx) {
+        db('passenger')
+          .where({ id: passengerId })
+          .del()
+          .transacting(trx)
+          .then(() =>
+            db('driver').where({ id: driverId }).del().transacting(trx)
+          )
+          .then(trx.commit)
+          .catch(trx.rollback);
+      })
+        .then(() => done())
         .catch((err) => done(err));
     });
 
     it('Should successfully create new ride', function (done) {
       const service = new Service();
 
-      // Create new ride
       service
         .create({
           passenger_id: passengerId,
@@ -68,16 +97,6 @@ describe('Ride management', function () {
 
           done();
         })
-        .catch((err) => done(err));
-    });
-
-    after(function (done) {
-      // Delete passenger after test
-      db('passenger')
-        .where({ id: passengerId })
-        .del()
-        .then(() => db('driver').where({ id: driverId }).del())
-        .then(() => done())
         .catch((err) => done(err));
     });
   });
