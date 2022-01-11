@@ -8,7 +8,6 @@
     "phone_number": "+254700000001"
   },
   "ride": {
-    "done": false,
     "pickup_point_lat": "-1.286389",
     "pickup_point_long": "36.817223",
     "destination_lat": "-1.286389",
