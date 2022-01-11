@@ -5,8 +5,8 @@ const { driver } = JSON.parse(data);
 const { expect } = require('chai');
 const { db } = require('../../util');
 
-describe('Driver management', function (done) {
-  before(function () {
+describe('Driver management', function () {
+  before(function (done) {
     // Remove driver before test.
 
     db('driver')
