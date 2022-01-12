@@ -47,12 +47,12 @@ Suspend driver by id.
 
 #### Header
 
-| Property      | Value                  | Description           |
-| ------------- | ---------------------- | --------------------- |
-| URL           | /driver /`:id`/suspend | Request url.          |
-| Method        | POST                   | Request method.       |
-| Content-Type  | application/json       | Request body type.    |
-| Authorization | Bearer [token]         | Request authorization |
+| Property      | Value                 | Description           |
+| ------------- | --------------------- | --------------------- |
+| URL           | /driver/`:id`/suspend | Request url.          |
+| Method        | POST                  | Request method.       |
+| Content-Type  | application/json      | Request body type.    |
+| Authorization | Bearer [token]        | Request authorization |
 
 #### Params
 
@@ -76,12 +76,12 @@ Unsuspend driver by id.
 
 #### Header
 
-| Property      | Value                  | Description           |
-| ------------- | ---------------------- | --------------------- |
-| URL           | /driver /`:id`/suspend | Request url.          |
-| Method        | DELETE                 | Request method.       |
-| Content-Type  | application/json       | Request body type.    |
-| Authorization | Bearer [token]         | Request authorization |
+| Property      | Value                 | Description           |
+| ------------- | --------------------- | --------------------- |
+| URL           | /driver/`:id`/suspend | Request url.          |
+| Method        | DELETE                | Request method.       |
+| Content-Type  | application/json      | Request body type.    |
+| Authorization | Bearer [token]        | Request authorization |
 
 #### Params
 
