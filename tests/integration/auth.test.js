@@ -15,7 +15,6 @@ describe('Admin authentication', function () {
         password: process.env.ADMIN_PASSWORD,
       })
       .then((response) => {
-        expect(err).to.be.null;
         expect(response).to.be.status(200);
         expect(response.body).to.be.an('object');
         expect(response.body).to.have.property('token');
@@ -34,7 +33,6 @@ describe('Admin authentication', function () {
         password: process.env.ADMIN_EMAIL,
       })
       .then((response) => {
-        expect(err).to.be.null;
         expect(response).to.be.status(401);
         expect(response.body).to.be.an('object');
         expect(response.body).to.have.property('name');
