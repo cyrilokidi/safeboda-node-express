@@ -31,6 +31,9 @@ Create new driver.
 
 #### Body
 
-| Field | Type     | Description          |
-| ----- | -------- | -------------------- |
-| token | `string` | Authorization token. |
+| Field        | Type     | Description             |
+| ------------ | -------- | ----------------------- |
+| id           | `uuid`   | Driver id.              |
+| name         | `string` | Driver phone name.      |
+| phone_number | `string` | Driver phone number.    |
+| created_at   | `date`   | Driver created at date. |
