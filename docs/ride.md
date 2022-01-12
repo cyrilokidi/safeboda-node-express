@@ -1,0 +1,54 @@
+## Create
+
+Create new ride
+
+### Request
+
+#### Header
+
+| Property      | Value                               | Description           |
+| ------------- | ----------------------------------- | --------------------- |
+| URL           | /ride /`:passenger_id`/`:driver_id` | Request url.          |
+| Method        | POST                                | Request method.       |
+| Content-Type  | application/json                    | Request body type.    |
+| Authorization | Bearer [token]                      | Request authorization |
+
+#### Params
+
+| Field        | Description   |
+| ------------ | ------------- |
+| passenger_id | Passenger id. |
+| driver_id    | Driver id.    |
+
+#### Body
+
+| Field             | Type      | Default | Description            |
+| ----------------- | --------- | ------- | ---------------------- |
+| done              | `boolean` | false   | Ride status            |
+| pickup_point_lat  | `number`  |         | Pickup point latitude. |
+| pickup_point_long | `number`  |         | Pickup point longitude |
+| destination_lat   | `number`  |         | Destination latitude.  |
+| destination_long  | `number`  |         | Destination longitude  |
+
+### Response
+
+#### Status
+
+| Code | Description         |
+| ---- | ------------------- |
+| 201  | Created successful. |
+| 409  | Ride already exist. |
+
+#### Body
+
+| Field             | Type      | Description             |
+| ----------------- | --------- | ----------------------- |
+| id                | `uuid`    | Ride id.                |
+| passenger_id      | `uuid`    | Passenger id.           |
+| driver_id         | `uuid`    | Driver id.              |
+| done              | `boolean` | Ride status.            |
+| pickup_point_lat  | `number`  | Pickup point latitude.  |
+| pickup_point_long | `number`  | Pickup point longitude. |
+| destination_lat   | `number`  | Destination latitude.   |
+| destination_long  | `number`  | Destination longitude.  |
+| created_at        | `date`    | Driver created at date. |

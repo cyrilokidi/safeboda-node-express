@@ -82,3 +82,9 @@ Driver management.
 Passenger management.
 
 [more](/docs/passenger.md)
+
+### Ride
+
+Ride management.
+
+[more](/docs/ride.md)
