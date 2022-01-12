@@ -56,4 +56,11 @@ npm run start
 
 ## Request flow
 
+| Step        | Description                                                |
+| ----------- | ---------------------------------------------------------- |
+| app         | Main entry point into the application.                     |
+| routes      | Exposes all application routes (end-points).               |
+| controllers | Controls the order of processing a request.                |
+| services    | Accepts client request, then returns appropriate response. |
+
 ## End-points
