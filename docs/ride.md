@@ -52,3 +52,45 @@ Create new ride
 | destination_lat   | `number`  | Destination latitude.   |
 | destination_long  | `number`  | Destination longitude.  |
 | created_at        | `date`    | Driver created at date. |
+
+## Stop
+
+Stop ongoing ride by id.
+
+### Request
+
+#### Header
+
+| Property      | Value             | Description           |
+| ------------- | ----------------- | --------------------- |
+| URL           | /ride /`:id`/stop | Request url.          |
+| Method        | PUT               | Request method.       |
+| Authorization | Bearer [token]    | Request authorization |
+
+#### Params
+
+| Field | Description |
+| ----- | ----------- |
+| id    | Ride id.    |
+
+### Response
+
+#### Status
+
+| Code | Description         |
+| ---- | ------------------- |
+| 200  | Stopped successful. |
+
+#### Body
+
+| Field             | Type      | Description             |
+| ----------------- | --------- | ----------------------- |
+| id                | `uuid`    | Ride id.                |
+| passenger_id      | `uuid`    | Passenger id.           |
+| driver_id         | `uuid`    | Driver id.              |
+| done              | `boolean` | Ride status.            |
+| pickup_point_lat  | `number`  | Pickup point latitude.  |
+| pickup_point_long | `number`  | Pickup point longitude. |
+| destination_lat   | `number`  | Destination latitude.   |
+| destination_long  | `number`  | Destination longitude.  |
+| created_at        | `date`    | Driver created at date. |
