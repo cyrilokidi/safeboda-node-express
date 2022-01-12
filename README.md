@@ -64,3 +64,9 @@ npm run start
 | services    | Accepts client request, then returns appropriate response. |
 
 ## End-points
+
+### Auth
+
+Authentication end-points.
+
+[more](/docs/auth)
