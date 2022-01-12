@@ -14,7 +14,7 @@ NODE_ENV=development
 
 PORT=2000
 
-ROOT_PATH=/
+ROOT_PATH=./
 
 # Database (postgres) config. variables
 
