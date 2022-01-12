@@ -30,6 +30,18 @@ Create new ride
 | destination_lat   | `number`  |         | Destination latitude.  |
 | destination_long  | `number`  |         | Destination longitude  |
 
+#### Example
+
+```js
+{
+    "done": true,
+    "pickup_point_lat": "-1.286389",
+    "pickup_point_long": "36.817223",
+    "destination_lat": "-1.286389",
+    "destination_long": "36.817223"
+}
+```
+
 ### Response
 
 #### Status
@@ -52,6 +64,22 @@ Create new ride
 | destination_lat   | `number`  | Destination latitude.   |
 | destination_long  | `number`  | Destination longitude.  |
 | created_at        | `date`    | Driver created at date. |
+
+#### Example
+
+```js
+{
+    "id": "b8befac1-597d-4513-b477-c0db8a5e4b1c",
+    "passenger_id": "f0d71bb7-cffc-44f7-99e0-4cbb576f8480",
+    "driver_id": "dca8cf17-d5db-45bf-af11-247f40304cd7",
+    "done": true,
+    "pickup_point_lat": "-1.286389",
+    "pickup_point_long": "36.817223",
+    "destination_lat": "-1.286389",
+    "destination_long": "36.817223",
+    "created_at": "2022-01-12T12:55:33.418Z"
+}
+```
 
 ## Stop
 
