@@ -3,7 +3,7 @@ const chaiHttp = require('chai-http');
 const server = require('../../app');
 const { expect } = chai;
 
-chai.use(chaiHttp).request(`/localhost:${process.env.PORT}`);
+chai.use(chaiHttp);
 
 describe('Admin authentication', function () {
   it('Should successfully login admin', function (done) {
@@ -14,14 +14,15 @@ describe('Admin authentication', function () {
         email: process.env.ADMIN_EMAIL,
         password: process.env.ADMIN_PASSWORD,
       })
-      .end((err, response) => {
+      .then((response) => {
         expect(err).to.be.null;
         expect(response).to.be.status(200);
         expect(response.body).to.be.an('object');
         expect(response.body).to.have.property('token');
 
         done();
-      });
+      })
+      .catch((err) => done(err));
   });
 
   it('Should fail to login admin with wrong credentials', function (done) {
@@ -32,7 +33,7 @@ describe('Admin authentication', function () {
         email: process.env.ADMIN_EMAIL,
         password: process.env.ADMIN_EMAIL,
       })
-      .end((err, response) => {
+      .then((response) => {
         expect(err).to.be.null;
         expect(response).to.be.status(401);
         expect(response.body).to.be.an('object');
@@ -42,6 +43,7 @@ describe('Admin authentication', function () {
         expect(response.body).to.have.property('message');
 
         done();
-      });
+      })
+      .catch((err) => done(err));
   });
 });
