@@ -34,7 +34,7 @@ Create new ride
 
 ```js
 {
-    "done": true,
+    "done": false,
     "pickup_point_lat": "-1.286389",
     "pickup_point_long": "36.817223",
     "destination_lat": "-1.286389",
@@ -72,7 +72,7 @@ Create new ride
     "id": "b8befac1-597d-4513-b477-c0db8a5e4b1c",
     "passenger_id": "f0d71bb7-cffc-44f7-99e0-4cbb576f8480",
     "driver_id": "dca8cf17-d5db-45bf-af11-247f40304cd7",
-    "done": true,
+    "done": false,
     "pickup_point_lat": "-1.286389",
     "pickup_point_long": "36.817223",
     "destination_lat": "-1.286389",
