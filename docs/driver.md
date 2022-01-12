@@ -20,6 +20,15 @@ Create new driver.
 | name         | `string` |         | Driver name.        |
 | phone_number | `string` |         | Driver phone number |
 
+#### Example
+
+```js
+{
+    "name": "John Doe",
+    "phone_number": "+254700000000"
+}
+```
+
 ### Response
 
 #### Status
@@ -38,6 +47,18 @@ Create new driver.
 | phone_number | `string`  | Driver phone number.    |
 | suspended    | `boolean` | Driver account status   |
 | created_at   | `date`    | Driver created at date. |
+
+#### Example
+
+```js
+{
+    "id": "4bb6ff6c-ab09-471b-988f-118a8015b1f0",
+    "name": "John Doe",
+    "phone_number": "+254700000000",
+    "suspended": false,
+    "created_at": "2022-01-12T11:14:40.821Z"
+}
+```
 
 ## Suspend
 
