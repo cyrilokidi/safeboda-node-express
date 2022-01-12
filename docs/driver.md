@@ -15,10 +15,10 @@ Create new driver.
 
 #### Body
 
-| Field        | Type     | Default | Description           |
-| ------------ | -------- | ------- | --------------------- |
-| name         | `string` |         | Driver's name.        |
-| phone_number | `string` |         | Driver's phone number |
+| Field        | Type     | Default | Description         |
+| ------------ | -------- | ------- | ------------------- |
+| name         | `string` |         | Driver name.        |
+| phone_number | `string` |         | Driver phone number |
 
 ### Response
 
@@ -31,12 +31,13 @@ Create new driver.
 
 #### Body
 
-| Field        | Type     | Description             |
-| ------------ | -------- | ----------------------- |
-| id           | `uuid`   | Driver id.              |
-| name         | `string` | Driver phone name.      |
-| phone_number | `string` | Driver phone number.    |
-| created_at   | `date`   | Driver created at date. |
+| Field        | Type      | Description             |
+| ------------ | --------- | ----------------------- |
+| id           | `uuid`    | Driver id.              |
+| name         | `string`  | Driver phone name.      |
+| phone_number | `string`  | Driver phone number.    |
+| suspended    | `boolean` | Driver account status   |
+| created_at   | `date`    | Driver created at date. |
 
 ## Suspend
 
