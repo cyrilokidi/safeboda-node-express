@@ -19,6 +19,15 @@ Login as an administrator to get authorization token for future requests.
 | email    | `string` |         | Administrator account email     |
 | password | `string` |         | Administrator account password. |
 
+#### Example
+
+```js
+{
+    "email": "okidicyril@gmail.com",
+    "password": "password"
+}
+```
+
 ### Response
 
 #### Status
@@ -33,3 +42,11 @@ Login as an administrator to get authorization token for future requests.
 | Field | Type     | Description          |
 | ----- | -------- | -------------------- |
 | token | `string` | Authorization token. |
+
+#### Example
+
+```js
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9raWRpY3lyaWxAZ21haWwuY29tIiwiaWF0IjoxNjQxOTg1NzEwLCJleHAiOjE2NDIwNzIxMTB9.lggp8akajXrVA_LVnT12QQIpnUIV67_zEUKs0YjgpSY"
+}
+```
