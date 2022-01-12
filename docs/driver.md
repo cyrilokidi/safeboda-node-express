@@ -63,6 +63,35 @@ Suspend driver by id.
 
 #### Status
 
-| Code | Description           |
-| ---- | --------------------- |
-| 204  | Suspended successful. |
+| Code | Description             |
+| ---- | ----------------------- |
+| 204  | Suspended successfully. |
+
+## Unuspend
+
+Unsuspend driver by id.
+
+### Request
+
+#### Header
+
+| Property      | Value                  | Description           |
+| ------------- | ---------------------- | --------------------- |
+| URL           | /driver /`:id`/suspend | Request url.          |
+| Method        | DELETE                 | Request method.       |
+| Content-Type  | application/json       | Request body type.    |
+| Authorization | Bearer [token]         | Request authorization |
+
+#### Params
+
+| Field | Description |
+| ----- | ----------- |
+| id    | Driver id.  |
+
+### Response
+
+#### Status
+
+| Code | Description               |
+| ---- | ------------------------- |
+| 204  | Unsuspended successfully. |
