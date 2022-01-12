@@ -70,3 +70,9 @@ npm run start
 Authentication end-points.
 
 [more](/docs/auth.md)
+
+### Driver
+
+Driver management.
+
+[more](/docs/driver.md)

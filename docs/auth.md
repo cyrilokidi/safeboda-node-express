@@ -1,10 +1,10 @@
-# Login
+## Login
 
 Login as an administrator to get authorization token for future requests.
 
-## Request
+### Request
 
-### Header
+#### Header
 
 | Property     | Value            | Description        |
 | ------------ | ---------------- | ------------------ |
@@ -12,23 +12,23 @@ Login as an administrator to get authorization token for future requests.
 | Method       | POST             | Request method.    |
 | Content-Type | application/json | Request body type. |
 
-### Body
+#### Body
 
 | Field    | Type     | Default | Description                     |
 | -------- | -------- | ------- | ------------------------------- |
 | email    | `string` |         | Administrator account email     |
 | password | `string` |         | Administrator account password. |
 
-## Response
+### Response
 
-### Status
+#### Status
 
 | Code | Description        |
 | ---- | ------------------ |
 | 201  | Login successful   |
 | 401  | Wrong credentials. |
 
-### Body
+#### Body
 
 | Field | Type     | Description          |
 | ----- | -------- | -------------------- |
