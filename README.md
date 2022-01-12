@@ -69,4 +69,4 @@ npm run start
 
 Authentication end-points.
 
-[more](/docs/auth)
+[more](/docs/auth.md)
