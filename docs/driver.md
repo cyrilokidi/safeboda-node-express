@@ -37,3 +37,32 @@ Create new driver.
 | name         | `string` | Driver phone name.      |
 | phone_number | `string` | Driver phone number.    |
 | created_at   | `date`   | Driver created at date. |
+
+## Suspend
+
+Suspend driver by id.
+
+### Request
+
+#### Header
+
+| Property      | Value                  | Description           |
+| ------------- | ---------------------- | --------------------- |
+| URL           | /driver /`:id`/suspend | Request url.          |
+| Method        | POST                   | Request method.       |
+| Content-Type  | application/json       | Request body type.    |
+| Authorization | Bearer [token]         | Request authorization |
+
+#### Params
+
+| Field | Description |
+| ----- | ----------- |
+| id    | Driver id.  |
+
+### Response
+
+#### Status
+
+| Code | Description           |
+| ---- | --------------------- |
+| 204  | Suspended successful. |
