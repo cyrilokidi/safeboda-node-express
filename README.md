@@ -76,3 +76,9 @@ Authentication end-points.
 Driver management.
 
 [more](/docs/driver.md)
+
+### Passenger
+
+Passenger management.
+
+[more](/docs/passenger.md)
