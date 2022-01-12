@@ -27,7 +27,7 @@ module.exports = {
         const service = new Service();
         const [ride] = await service.stop(params.id);
 
-        res.status(204);
+        res.status(200);
         res.json(ride);
       } catch (error) {
         next(error);
