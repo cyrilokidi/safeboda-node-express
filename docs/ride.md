@@ -172,3 +172,32 @@ Get all ongoing rides.
 | destination_lat        | `number`  | Destination latitude.   |
 | destination_long       | `number`  | Destination longitude.  |
 | created_at             | `date`    | Driver created at date. |
+
+### Example
+
+```js
+{
+    "page_number": 1,
+    "page_limit": 10,
+    "sort_field": "created_at",
+    "sort_order": "desc",
+    "total_count": 1,
+    "rides": [
+        {
+            "id": "dbe7bb89-d009-4744-808e-28ad720a496b",
+            "passenger_id": "f0d71bb7-cffc-44f7-99e0-4cbb576f8480",
+            "passenger_name": "Jane Doe",
+            "passenger_phone_number": "+254700000000",
+            "driver_id": "dca8cf17-d5db-45bf-af11-247f40304cd7",
+            "driver_name": "John Doe",
+            "driver_phone_number": "+254700000000",
+            "done": false,
+            "pickup_point_lat": "-1.286389",
+            "pickup_point_long": "36.817223",
+            "destination_lat": "-1.286389",
+            "destination_long": "36.817223",
+            "created_at": "2022-01-12T13:02:55.572Z"
+        }
+    ]
+}
+```
