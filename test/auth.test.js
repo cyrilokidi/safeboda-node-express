@@ -34,11 +34,6 @@ describe('Admin authentication', function () {
       })
       .then((response) => {
         expect(response).to.be.status(401);
-        expect(response.body).to.be.an('object');
-        expect(response.body).to.have.property('name').that.is.a('string');
-        expect(response.body).to.have.property('code').that.is.a('number');
-        expect(response.body).to.have.property('date').that.is.a('string');
-        expect(response.body).to.have.property('message').that.is.a('string');
 
         done();
       })

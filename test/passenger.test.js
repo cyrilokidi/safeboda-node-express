@@ -58,6 +58,19 @@ describe('Passenger management', function () {
       .catch((err) => done(err));
   });
 
+  it('Should reject request without authorization header', function (done) {
+    chai
+      .request(server)
+      .post('/passenger')
+      .send({ ...passenger })
+      .then((res) => {
+        expect(res).to.have.status(400);
+
+        done();
+      })
+      .catch((err) => done(err));
+  });
+
   describe('Create existing passenger', function () {
     before(function (done) {
       db('passenger')
