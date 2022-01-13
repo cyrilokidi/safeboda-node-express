@@ -2,12 +2,15 @@
 
 Backend API application to manage motorcycle drivers, passengers and monitor the current ongoing rides.
 
-## Requirements
+## Technologies used
 
 - Node (v14.15.0 at the time of development)
 - PostgreSQL (10.15 at the time of development)
+- Frameworks; [Express (Web framework)](http://expressjs.com/), [KenxJs (DB ORM)](https://knexjs.org/), [Jsonwebtoken (Token generation library)](https://www.npmjs.com/package/jsonwebtoken)
 
 ## Setup
+
+Using the link provided on the email, copy repo url then clone using the command `git clone git@github.com:cyrilokidi/safeboda-node-express.git`
 
 Create a file named `.env` at the application root folder and add environment variables as shown in the example below.
 
