@@ -108,6 +108,8 @@ Stop ongoing ride by id.
 | Code | Description         |
 | ---- | ------------------- |
 | 200  | Stopped successful. |
+| 404  | Ride not found.     |
+| 400  | Ride already done.  |
 
 #### Body
 
