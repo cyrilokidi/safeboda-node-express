@@ -1,6 +1,7 @@
 const Service = require('../services/driver');
 const { validate } = require('../middlewares');
 const schema = require('../schemas/driver');
+const { NotFoundError } = require('../errors');
 
 module.exports = {
   create: [
@@ -25,7 +26,9 @@ module.exports = {
       try {
         const { id } = req.params;
         const service = new Service();
-        await service.suspend(id);
+        const suspended = await service.suspend(id);
+
+        if (suspended < 1) throw new NotFoundError('Driver not found.');
 
         res.status(204);
         res.end();
@@ -41,7 +44,9 @@ module.exports = {
       try {
         const { id } = req.params;
         const service = new Service();
-        await service.unsuspend(id);
+        const suspended = await service.unsuspend(id);
+
+        if (suspended < 1) throw new NotFoundError('Driver not found.');
 
         res.status(204);
         res.end();
