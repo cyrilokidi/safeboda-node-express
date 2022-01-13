@@ -1,6 +1,7 @@
 const Service = require('../services/ride');
 const { validate } = require('../middlewares');
 const schema = require('../schemas/ride');
+const { NotFoundError } = require('../errors');
 
 module.exports = {
   create: [
@@ -26,6 +27,9 @@ module.exports = {
         const { params } = req;
         const service = new Service();
         const [ride] = await service.stop(params.id);
+
+        // Check if ride is stopped
+        if (!ride) throw new NotFoundError('Ride not found.');
 
         res.status(200);
         res.json(ride);
