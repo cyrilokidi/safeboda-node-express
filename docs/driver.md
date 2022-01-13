@@ -87,6 +87,7 @@ Suspend driver by id.
 | Code | Description             |
 | ---- | ----------------------- |
 | 204  | Suspended successfully. |
+| 404  | Driver not found.       |
 
 ## Unuspend
 
@@ -115,3 +116,4 @@ Unsuspend driver by id.
 | Code | Description               |
 | ---- | ------------------------- |
 | 204  | Unsuspended successfully. |
+| 404  | Driver not found.         |

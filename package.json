@@ -1,7 +1,7 @@
 {
   "scripts": {
     "start": "node server.js",
-    "test": "mocha 'tests/**/*.test.js'",
+    "test": "mocha",
     "dev": "nodemon server.js",
     "lint": "eslint . --fix",
     "migrate": "knex migrate:latest",

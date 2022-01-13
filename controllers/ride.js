@@ -1,6 +1,7 @@
 const Service = require('../services/ride');
 const { validate } = require('../middlewares');
 const schema = require('../schemas/ride');
+const { NotFoundError, RequestValidationError } = require('../errors');
 
 module.exports = {
   create: [
@@ -27,6 +28,13 @@ module.exports = {
         const service = new Service();
         const [ride] = await service.stop(params.id);
 
+        // Check if ride is stopped
+        if (!ride) throw new NotFoundError('Ride not found.');
+
+        // Check if ride is already stopped
+        if (ride.done === true)
+          throw new RequestValidationError('Ride already stopped.');
+
         res.status(200);
         res.json(ride);
       } catch (error) {
@@ -36,19 +44,13 @@ module.exports = {
   ],
 
   ongoing: [
-    validate(schema.ongoing),
     async (req, res, next) => {
       try {
-        const { query } = req;
         const service = new Service();
-        const [rides, [{ count }]] = await service.ongoing(query);
+        const rides = await service.ongoing();
 
         res.status(200);
-        res.json({
-          ...query,
-          total_count: Number(count),
-          rides,
-        });
+        res.json(rides);
       } catch (error) {
         next(error);
       }
