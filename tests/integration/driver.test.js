@@ -55,4 +55,32 @@ describe('Driver end-points', function () {
       })
       .catch((err) => done(err));
   });
+
+  describe('Create existing driver', function () {
+    before(function (done) {
+      db('driver')
+        .insert({ ...driver })
+        .then(() => done())
+        .catch((err) => done(err));
+    });
+
+    it('Should fail to create existing driver', function (done) {
+      chai
+        .request(server)
+        .post('/driver')
+        .set('Authorization', authorization)
+        .send({ ...driver })
+        .then((res) => {
+          expect(res).to.have.status(409);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('name').that.is.a('string');
+          expect(res.body).to.have.property('code').that.is.a('number');
+          expect(res.body).to.have.property('date').that.is.a('string');
+          expect(res.body).to.have.property('message').that.is.a('string');
+
+          done();
+        })
+        .catch((err) => done(err));
+    });
+  });
 });
