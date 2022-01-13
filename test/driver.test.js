@@ -122,6 +122,19 @@ describe('Driver management', function () {
         .catch((err) => done(err));
     });
 
+    it('Should fail to suspend inexistent driver', function (done) {
+      chai
+        .request(server)
+        .post(`/driver/02e5f60e-50b0-4c12-aa0b-0c271589aa53/suspend`)
+        .set('Authorization', authorization)
+        .then((res) => {
+          expect(res).to.be.status(404);
+
+          done();
+        })
+        .catch((err) => done(err));
+    });
+
     it('Should successfully unsuspend driver', function (done) {
       chai
         .request(server)
@@ -129,6 +142,19 @@ describe('Driver management', function () {
         .set('Authorization', authorization)
         .then((res) => {
           expect(res).to.be.status(204);
+
+          done();
+        })
+        .catch((err) => done(err));
+    });
+
+    it('Should fail to unsuspend inexistent driver', function (done) {
+      chai
+        .request(server)
+        .delete(`/driver/02e5f60e-50b0-4c12-aa0b-0c271589aa53/suspend`)
+        .set('Authorization', authorization)
+        .then((res) => {
+          expect(res).to.be.status(404);
 
           done();
         })
