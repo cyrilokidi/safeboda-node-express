@@ -83,4 +83,43 @@ describe('Driver end-points', function () {
         .catch((err) => done(err));
     });
   });
+
+  describe('Suspend/Unsuspend driver', function () {
+    let id;
+
+    beforeEach(function (done) {
+      chai
+        .request(server)
+        .post('/driver')
+        .set('Authorization', authorization)
+        .send({ ...driver })
+        .then((res) => {
+          id = res.body.id;
+
+          done();
+        })
+        .catch((err) => done(err));
+    });
+
+    afterEach(function (done) {
+      db('driver')
+        .where({ phone_number: driver.phone_number })
+        .del()
+        .then(() => done())
+        .catch((err) => done(err));
+    });
+
+    it('Should successfully suspend driver', function (done) {
+      chai
+        .request(server)
+        .post(`/driver/${id}/suspend`)
+        .set('Authorization', authorization)
+        .then((res) => {
+          expect(res).to.be.status(204);
+
+          done();
+        })
+        .catch((err) => done(err));
+    });
+  });
 });
