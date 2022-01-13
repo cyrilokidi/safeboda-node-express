@@ -1,11 +1,11 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const server = require('../../app');
+const server = require('../app');
 const { expect } = chai;
 const fs = require('fs');
-const data = fs.readFileSync(__dirname + '/../data.json', 'utf-8');
+const data = fs.readFileSync(__dirname + '/data.json', 'utf-8');
 const { driver } = JSON.parse(data);
-const { db } = require('../../util');
+const { db } = require('../util');
 
 chai.use(chaiHttp);
 
