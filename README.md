@@ -38,23 +38,19 @@ Then run `npm install` command to install all the required dependencies.
 
 ## Commands
 
-The following commands can be executed at the terminal. Cd into the application root folder, then type `npm run` followed by either of the following commands;
+The following commands can be executed at the terminal.
 
-| Command  | Description                                   |
-| -------- | --------------------------------------------- |
-| start    | Start application.                            |
-| test     | Executes all test file in the `tests` folder. |
-| dev      | Runs the application in development mode.     |
-| migrate  | Run all migrations.                           |
-| rollback | Rollback all migrations.                      |
-
-```bash
-# Example command
-
-npm run start
-```
+| Command            | Description                                   |
+| ------------------ | --------------------------------------------- |
+| `npm run start`    | Start application.                            |
+| `npm run test`     | Executes all test file in the `tests` folder. |
+| `npm run dev`      | Runs the application in development mode.     |
+| `npm run migrate`  | Run all migrations.                           |
+| `npm run rollback` | Rollback all migrations.                      |
 
 ## Request flow
+
+A typical client request goes through the process listed below.
 
 | Step        | Description                                                |
 | ----------- | ---------------------------------------------------------- |
@@ -68,6 +64,8 @@ npm run start
 ### Auth
 
 Authentication end-points.
+
+> Only requests handled by end-points in this section do not need authorization.
 
 [more](/docs/auth.md)
 
