@@ -1,11 +1,11 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const server = require('../../app');
+const server = require('../app');
 const { expect } = chai;
 
 chai.use(chaiHttp);
 
-describe('Admin authentication', function () {
+describe('Auth end-points', function () {
   it('Should successfully login admin', function (done) {
     chai
       .request(server)
@@ -17,7 +17,7 @@ describe('Admin authentication', function () {
       .then((response) => {
         expect(response).to.be.status(200);
         expect(response.body).to.be.an('object');
-        expect(response.body).to.have.property('token');
+        expect(response.body).to.have.property('token').that.is.a('string');
 
         done();
       })
@@ -35,10 +35,10 @@ describe('Admin authentication', function () {
       .then((response) => {
         expect(response).to.be.status(401);
         expect(response.body).to.be.an('object');
-        expect(response.body).to.have.property('name');
-        expect(response.body).to.have.property('code');
-        expect(response.body).to.have.property('date');
-        expect(response.body).to.have.property('message');
+        expect(response.body).to.have.property('name').that.is.a('string');
+        expect(response.body).to.have.property('code').that.is.a('number');
+        expect(response.body).to.have.property('date').that.is.a('string');
+        expect(response.body).to.have.property('message').that.is.a('string');
 
         done();
       })
