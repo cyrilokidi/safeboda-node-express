@@ -5,7 +5,7 @@ const { expect } = chai;
 
 chai.use(chaiHttp);
 
-describe('Auth end-points', function () {
+describe('Admin authentication', function () {
   it('Should successfully login admin', function (done) {
     chai
       .request(server)

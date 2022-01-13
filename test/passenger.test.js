@@ -9,7 +9,7 @@ const { db } = require('../util');
 
 chai.use(chaiHttp);
 
-describe('Passenger end-points', function () {
+describe('Passenger management', function () {
   let authorization;
 
   before(function (done) {
