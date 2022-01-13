@@ -28,6 +28,7 @@ module.exports = {
         const service = new Service();
         const suspended = await service.suspend(id);
 
+        // Check if driver is supended
         if (suspended < 1) throw new NotFoundError('Driver not found.');
 
         res.status(204);
@@ -46,6 +47,7 @@ module.exports = {
         const service = new Service();
         const suspended = await service.unsuspend(id);
 
+        // Check if driver is unsuspended
         if (suspended < 1) throw new NotFoundError('Driver not found.');
 
         res.status(204);
