@@ -9,7 +9,7 @@ const { db } = require('../util');
 
 chai.use(chaiHttp);
 
-describe('Driver end-points', function () {
+describe('Driver management', function () {
   let authorization;
 
   before(function (done) {
@@ -113,6 +113,19 @@ describe('Driver end-points', function () {
       chai
         .request(server)
         .post(`/driver/${id}/suspend`)
+        .set('Authorization', authorization)
+        .then((res) => {
+          expect(res).to.be.status(204);
+
+          done();
+        })
+        .catch((err) => done(err));
+    });
+
+    it('Should successfully unsuspend driver', function (done) {
+      chai
+        .request(server)
+        .delete(`/driver/${id}/suspend`)
         .set('Authorization', authorization)
         .then((res) => {
           expect(res).to.be.status(204);
