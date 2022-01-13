@@ -9,7 +9,7 @@ const { db } = require('../util');
 
 chai.use(chaiHttp);
 
-describe('Passenger end-points', function () {
+describe('Passenger management', function () {
   let authorization;
 
   before(function (done) {
@@ -52,6 +52,19 @@ describe('Passenger end-points', function () {
           passenger.phone_number
         );
         expect(res.body).to.have.property('created_at').that.is.a('string');
+
+        done();
+      })
+      .catch((err) => done(err));
+  });
+
+  it('Should reject request without authorization header', function (done) {
+    chai
+      .request(server)
+      .post('/passenger')
+      .send({ ...passenger })
+      .then((res) => {
+        expect(res).to.have.status(400);
 
         done();
       })

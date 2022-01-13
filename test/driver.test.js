@@ -9,7 +9,7 @@ const { db } = require('../util');
 
 chai.use(chaiHttp);
 
-describe('Driver end-points', function () {
+describe('Driver management', function () {
   let authorization;
 
   before(function (done) {
@@ -56,6 +56,19 @@ describe('Driver end-points', function () {
       .catch((err) => done(err));
   });
 
+  it('Should reject request without authorization header', function (done) {
+    chai
+      .request(server)
+      .post('/driver')
+      .send({ ...driver })
+      .then((res) => {
+        expect(res).to.be.status(400);
+
+        done();
+      })
+      .catch((err) => done(err));
+  });
+
   describe('Create existing driver', function () {
     before(function (done) {
       db('driver')
@@ -72,11 +85,6 @@ describe('Driver end-points', function () {
         .send({ ...driver })
         .then((res) => {
           expect(res).to.have.status(409);
-          expect(res.body).to.be.an('object');
-          expect(res.body).to.have.property('name').that.is.a('string');
-          expect(res.body).to.have.property('code').that.is.a('number');
-          expect(res.body).to.have.property('date').that.is.a('string');
-          expect(res.body).to.have.property('message').that.is.a('string');
 
           done();
         })
@@ -116,6 +124,69 @@ describe('Driver end-points', function () {
         .set('Authorization', authorization)
         .then((res) => {
           expect(res).to.be.status(204);
+
+          done();
+        })
+        .catch((err) => done(err));
+    });
+
+    it('Should fail to suspend inexistent driver', function (done) {
+      chai
+        .request(server)
+        .post(`/driver/02e5f60e-50b0-4c12-aa0b-0c271589aa53/suspend`)
+        .set('Authorization', authorization)
+        .then((res) => {
+          expect(res).to.be.status(404);
+
+          done();
+        })
+        .catch((err) => done(err));
+    });
+
+    it('Should reject request without authorization header', function (done) {
+      chai
+        .request(server)
+        .post(`/driver/${id}/suspend`)
+        .then((res) => {
+          expect(res).to.be.status(400);
+
+          done();
+        })
+        .catch((err) => done(err));
+    });
+
+    it('Should successfully unsuspend driver', function (done) {
+      chai
+        .request(server)
+        .delete(`/driver/${id}/suspend`)
+        .set('Authorization', authorization)
+        .then((res) => {
+          expect(res).to.be.status(204);
+
+          done();
+        })
+        .catch((err) => done(err));
+    });
+
+    it('Should fail to unsuspend inexistent driver', function (done) {
+      chai
+        .request(server)
+        .delete(`/driver/02e5f60e-50b0-4c12-aa0b-0c271589aa53/suspend`)
+        .set('Authorization', authorization)
+        .then((res) => {
+          expect(res).to.be.status(404);
+
+          done();
+        })
+        .catch((err) => done(err));
+    });
+
+    it('Should reject request without authorization header', function (done) {
+      chai
+        .request(server)
+        .delete(`/driver/${id}/suspend`)
+        .then((res) => {
+          expect(res).to.be.status(400);
 
           done();
         })
