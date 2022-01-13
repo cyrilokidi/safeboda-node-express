@@ -56,6 +56,19 @@ describe('Driver management', function () {
       .catch((err) => done(err));
   });
 
+  it('Should reject request without authorization header', function (done) {
+    chai
+      .request(server)
+      .post('/driver')
+      .send({ ...driver })
+      .then((res) => {
+        expect(res).to.be.status(400);
+
+        done();
+      })
+      .catch((err) => done(err));
+  });
+
   describe('Create existing driver', function () {
     before(function (done) {
       db('driver')
@@ -72,11 +85,6 @@ describe('Driver management', function () {
         .send({ ...driver })
         .then((res) => {
           expect(res).to.have.status(409);
-          expect(res.body).to.be.an('object');
-          expect(res.body).to.have.property('name').that.is.a('string');
-          expect(res.body).to.have.property('code').that.is.a('number');
-          expect(res.body).to.have.property('date').that.is.a('string');
-          expect(res.body).to.have.property('message').that.is.a('string');
 
           done();
         })
@@ -135,6 +143,18 @@ describe('Driver management', function () {
         .catch((err) => done(err));
     });
 
+    it('Should reject request without authorization header', function (done) {
+      chai
+        .request(server)
+        .post(`/driver/${id}/suspend`)
+        .then((res) => {
+          expect(res).to.be.status(400);
+
+          done();
+        })
+        .catch((err) => done(err));
+    });
+
     it('Should successfully unsuspend driver', function (done) {
       chai
         .request(server)
@@ -155,6 +175,18 @@ describe('Driver management', function () {
         .set('Authorization', authorization)
         .then((res) => {
           expect(res).to.be.status(404);
+
+          done();
+        })
+        .catch((err) => done(err));
+    });
+
+    it('Should reject request without authorization header', function (done) {
+      chai
+        .request(server)
+        .delete(`/driver/${id}/suspend`)
+        .then((res) => {
+          expect(res).to.be.status(400);
 
           done();
         })
