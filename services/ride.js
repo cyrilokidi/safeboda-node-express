@@ -39,29 +39,13 @@ module.exports = class Ride {
    * @returns {Array} query to get many ongoing rides.
    */
   ongoing(options) {
-    // const { search, page_number, page_limit, sort_field, sort_order } = options;
     const offset = this.calcOffset(options.page_number, options.page_limit);
 
     const query = () =>
-      options.search
-        ? db(this.table)
-            .where({ done: false })
-            .andWhere((b) => {
-              b.where('passenger.name', 'ILIKE', `%${options.search}%`);
-              b.orWhere(
-                'passenger.phone_number',
-                'ILIKE',
-                `%${options.search}%`
-              );
-              b.orWhere('driver.name', 'ILIKE', `%${options.search}%`);
-              b.orWhere('driver.phone_number', 'ILIKE', `%${options.search}%`);
-            })
-            .join('passenger', `${this.table}.passenger_id`, 'passenger.id')
-            .join('driver', `${this.table}.driver_id`, 'driver.id')
-        : db(this.table)
-            .where({ done: false })
-            .join('passenger', `${this.table}.passenger_id`, 'passenger.id')
-            .join('driver', `${this.table}.driver_id`, 'driver.id');
+      db(this.table)
+        .where({ done: false })
+        .join('passenger', `${this.table}.passenger_id`, 'passenger.id')
+        .join('driver', `${this.table}.driver_id`, 'driver.id');
 
     return Promise.all([
       query()

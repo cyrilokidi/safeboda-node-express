@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "start": "node server.js",
     "test": "mocha 'tests/**/*.test.js'",
     "dev": "nodemon server.js",
     "lint": "eslint . --fix",
