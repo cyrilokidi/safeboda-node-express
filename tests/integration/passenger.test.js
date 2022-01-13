@@ -10,6 +10,8 @@ const { db } = require('../../util');
 chai.use(chaiHttp);
 
 describe('Passenger management', function () {
+  let authorization;
+
   before(function (done) {
     chai
       .request(server)
@@ -19,7 +21,7 @@ describe('Passenger management', function () {
         password: process.env.ADMIN_PASSWORD,
       })
       .then((res) => {
-        this.authorization = `Bearer ${res.body.token}`;
+        authorization = `Bearer ${res.body.token}`;
 
         done();
       })
@@ -38,7 +40,7 @@ describe('Passenger management', function () {
     chai
       .request(server)
       .post('/passenger')
-      .set('Authorization', this.authorization)
+      .set('Authorization', authorization)
       .send({ ...passenger })
       .then((res) => {
         expect(res).to.have.status(201);
@@ -68,7 +70,7 @@ describe('Passenger management', function () {
       chai
         .request(server)
         .post('/passenger')
-        .set('Authorization', this.authorization)
+        .set('Authorization', authorization)
         .send({ ...passenger })
         .then((res) => {
           expect(res).to.have.status(409);
