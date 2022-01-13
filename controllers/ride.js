@@ -44,19 +44,13 @@ module.exports = {
   ],
 
   ongoing: [
-    validate(schema.ongoing),
     async (req, res, next) => {
       try {
-        const { query } = req;
         const service = new Service();
-        const [rides, [{ count }]] = await service.ongoing(query);
+        const rides = await service.ongoing();
 
         res.status(200);
-        res.json({
-          ...query,
-          total_count: Number(count),
-          rides,
-        });
+        res.json(rides);
       } catch (error) {
         next(error);
       }

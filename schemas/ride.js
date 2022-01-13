@@ -31,45 +31,4 @@ module.exports = {
       }),
     })
     .unknown(),
-
-  ongoing: object
-    .keys({
-      query: object.keys({
-        page_number: number.min(1).default(1).label('page number'),
-        page_limit: number.default(10).label('page limit'),
-        sort_field: string
-          .valid(
-            'passenger_name',
-            'passenger_phone_number',
-            'driver_name',
-            'driver_phone_number',
-            'created_at'
-          )
-          .default('created_at')
-          .custom((value) => {
-            switch (value) {
-              case 'passenger_name':
-                return 'passenger.name';
-
-              case 'passenger_phone_number':
-                return 'passenger.phone_number';
-
-              case 'driver_name':
-                return 'driver.name';
-
-              case 'driver_phone_number':
-                return 'driver.phone_number';
-
-              default:
-                return 'ride.created_at';
-            }
-          })
-          .label('sort field'),
-        sort_order: string
-          .valid('asc', 'desc')
-          .default('desc')
-          .label('sort order'),
-      }),
-    })
-    .unknown(),
 };
