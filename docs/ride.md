@@ -157,26 +157,26 @@ Get all ongoing rides.
 
 #### Body
 
-| Field                        | Type      | Description             |
-| ---------------------------- | --------- | ----------------------- |
-| page_number                  | `number`  | Page number.            |
-| page_limit                   | `number`  | Paginatiob limit.       |
-| sort_field                   | `string`  | Sort field.             |
-| sort_order                   | `string`  | Sort order.             |
-| rides                        | `object`  | Ride information.       |
-| rides.id                     | `uuid`    | Ride id.                |
-| rides.passenger_id           | `uuid`    | Passenger id.           |
-| rides.passenger_name         | `string`  | Passenger name.         |
-| rides.passenger_phone_number | `string`  | Passenger phone number. |
-| rides.driver_id              | `uuid`    | Driver id.              |
-| rides.driver_name            | `string`  | Driver name.            |
-| rides.driver_phone_number    | `string`  | Driver phone number.    |
-| rides.done                   | `boolean` | Ride status.            |
-| rides.pickup_point_lat       | `number`  | Pickup point latitude.  |
-| rides.pickup_point_long      | `number`  | Pickup point longitude. |
-| rides.destination_lat        | `number`  | Destination latitude.   |
-| rides.destination_long       | `number`  | Destination longitude.  |
-| rides.created_at             | `date`    | Driver created at date. |
+| Field                              | Type      | Description             |
+| ---------------------------------- | --------- | ----------------------- |
+| page_number                        | `number`  | Page number.            |
+| page_limit                         | `number`  | Paginatiob limit.       |
+| sort_field                         | `string`  | Sort field.             |
+| sort_order                         | `string`  | Sort order.             |
+| rides                              | `array`   | List of ongoing rides.  |
+| rides[ride.id]                     | `uuid`    | Ride id.                |
+| rides[ride.passenger_id]           | `uuid`    | Passenger id.           |
+| rides[ride.passenger_name]         | `string`  | Passenger name.         |
+| rides[ride.passenger_phone_number] | `string`  | Passenger phone number. |
+| rides[ride.driver_id]              | `uuid`    | Driver id.              |
+| rides[ride.driver_name]            | `string`  | Driver name.            |
+| rides[ride.driver_phone_number]    | `string`  | Driver phone number.    |
+| rides[ride.done]                   | `boolean` | Ride status.            |
+| rides[ride.pickup_point_lat]       | `number`  | Pickup point latitude.  |
+| rides[ride.pickup_point_long]      | `number`  | Pickup point longitude. |
+| rides[ride.destination_lat]        | `number`  | Destination latitude.   |
+| rides[ride.destination_long]       | `number`  | Destination longitude.  |
+| rides[ride.created_at]             | `date`    | Driver created at date. |
 
 ### Example
 
