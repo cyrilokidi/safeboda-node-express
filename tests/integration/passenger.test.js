@@ -28,7 +28,7 @@ describe('Passenger management', function () {
       .catch((err) => done(err));
   });
 
-  after(function (done) {
+  afterEach(function (done) {
     db('passenger')
       .where({ phone_number: passenger.phone_number })
       .del()
@@ -56,5 +56,33 @@ describe('Passenger management', function () {
         done();
       })
       .catch((err) => done(err));
+  });
+
+  describe('Create existing passenger', function () {
+    before(function (done) {
+      db('passenger')
+        .insert({ ...passenger })
+        .then(() => done())
+        .catch((err) => done(err));
+    });
+
+    it('Should fail to create existing passenger', function (done) {
+      chai
+        .request(server)
+        .post('/passenger')
+        .set('Authorization', authorization)
+        .send({ ...passenger })
+        .then((res) => {
+          expect(res).to.have.status(409);
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.property('name');
+          expect(res.body).to.have.property('code');
+          expect(res.body).to.have.property('date');
+          expect(res.body).to.have.property('message');
+
+          done();
+        })
+        .catch((err) => done(err));
+    });
   });
 });
