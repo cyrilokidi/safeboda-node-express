@@ -35,7 +35,6 @@ module.exports = {
   ongoing: object
     .keys({
       query: object.keys({
-        search: string.label('search'),
         page_number: number.min(1).default(1).label('page number'),
         page_limit: number.default(10).label('page limit'),
         sort_field: string
