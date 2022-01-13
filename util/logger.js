@@ -29,7 +29,7 @@ const productionFormatOptions = format.combine(
 
 // print logs in console if environment is in production
 
-if (NODE_ENV !== 'production' && NODE_ENV !== 'test') {
+if (NODE_ENV === 'development') {
   logger.add(
     new transports.Console({
       format: productionFormatOptions,
