@@ -9,7 +9,7 @@ const { db } = require('../../util');
 
 chai.use(chaiHttp);
 
-describe('Passenger management', function () {
+describe('Passenger end-points', function () {
   let authorization;
 
   before(function (done) {
@@ -45,13 +45,13 @@ describe('Passenger management', function () {
       .then((res) => {
         expect(res).to.have.status(201);
         expect(res.body).to.be.an('object');
-        expect(res.body).to.have.property('id');
+        expect(res.body).to.have.property('id').that.is.a('string');
         expect(res.body).to.have.property('name', passenger.name);
         expect(res.body).to.have.property(
           'phone_number',
           passenger.phone_number
         );
-        expect(res.body).to.have.property('created_at');
+        expect(res.body).to.have.property('created_at').that.is.a('string');
 
         done();
       })
@@ -75,10 +75,10 @@ describe('Passenger management', function () {
         .then((res) => {
           expect(res).to.have.status(409);
           expect(res.body).to.be.an('object');
-          expect(res.body).to.have.property('name');
-          expect(res.body).to.have.property('code');
-          expect(res.body).to.have.property('date');
-          expect(res.body).to.have.property('message');
+          expect(res.body).to.have.property('name').that.is.a('string');
+          expect(res.body).to.have.property('code').that.is.a('number');
+          expect(res.body).to.have.property('date').that.is.a('string');
+          expect(res.body).to.have.property('message').that.is.a('string');
 
           done();
         })
